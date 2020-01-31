@@ -6,19 +6,14 @@
         <p>You are not authorized to access this page. Please login or register</p>
     </div>
     @else
-        @foreach ($tweets as $tweet)
-            <p><strong>{{$tweet-> author}}</strong></p>
-            <p>{{$tweet-> content}}</p>
-        @endforeach
+        <p><strong>{{$tweets-> author}}</strong></p>
+        <p>{{$tweets-> content}}</p>
 
-        {{-- @php
-        print_r($tweets)
-    @endphp --}}
         <form action="/home/profile/tweetUpdate" method="post">
             @csrf
             <input type="hidden" name="author" value={{Auth::user()->name}} >
-            <input type="text" name="content" placeholder="content" >
-            <button class="btn" type="submit" name="id" value ="{{$tweet->id}}">Update</button>
+            <textarea  rows="4" cols="50" type="text" name="content" placeholder="New Content" ></textarea>
+            <button class="btn" type="submit" name="id" value ="{{$tweets->id}}">Update</button>
         </form>
         @if($errors->any())
         <div>
